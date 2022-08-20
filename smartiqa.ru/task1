@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+#opens the file "file" and reads the last "lines" number of lines from it then prints them out
+
+from sys import argv
+
+def read_last(lines,file):
+    print (f'from file {file} {lines} lines have read and printed below:')
+    if int(lines) > 0:
+        with open(file, mode='r',encoding='utf-8') as reading_file:
+            rows = 0
+            for line in reading_file:
+                rows += 1
+        with open(file, mode='r',encoding='utf-8') as reading_file:
+            for record in reading_file:
+                if rows <= int(lines):
+                    print(record,end='')
+                rows -= 1
+
+try:
+    script_name, file, lines = argv
+except ValueError:
+    print ('There is no parameter(s). The internal data which is located in the script will be used.')
+    file = 'article.txt'
+    lines = 3
+else:
+    print (f'parameters are {file}, {lines}')
+
+read_last(lines, file)
